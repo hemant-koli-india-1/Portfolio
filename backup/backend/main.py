@@ -1,7 +1,5 @@
 from fastapi import FastAPI, HTTPException, Request, status
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
 from pydantic import BaseModel, BaseSettings
 from typing import List, Dict, Optional, Any
 import json
@@ -48,16 +46,13 @@ logger.info(f"Starting server in {settings.environment} mode")
 
 # Initialize FastAPI app
 app = FastAPI(
-    title="Portfolio Website",
-    description="Portfolio website with chatbot API",
+    title="Portfolio Chatbot API",
+    description="API for the portfolio website chatbot",
     version="1.0.0",
-    docs_url="/docs" if settings.environment == "development" else None,
-    redoc_url="/redoc" if settings.environment == "development" else None,
-    openapi_url="/openapi.json" if settings.environment == "development" else None
+    docs_url="/docs" if os.getenv("ENVIRONMENT", "development") == "development" else None,
+    redoc_url="/redoc" if os.getenv("ENVIRONMENT", "development") == "development" else None,
+    openapi_url="/openapi.json" if os.getenv("ENVIRONMENT", "development") == "development" else None
 )
-
-# Mount static files
-app.mount("/static", StaticFiles(directory="../static", html=True), name="static")
 
 # Get CORS origins from environment
 cors_origins = os.getenv("CORS_ORIGINS", "*")
@@ -161,11 +156,7 @@ def generate_response(user_message: str) -> str:
 # API Endpoints
 @app.get("/")
 async def root():
-    return FileResponse("../static/index.html")
-
-@app.get("/api/health")
-async def health():
-    return {"status": "ok", "message": "Portfolio API is running"}
+    return {"message": "Portfolio Chatbot API is running"}
 
 @app.post("/api/chat", response_model=ChatResponse)
 async def chat(chat_request: ChatRequest):
