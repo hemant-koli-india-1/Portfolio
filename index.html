@@ -397,6 +397,43 @@
         </div>
     </footer>
 
+    <!-- Chat Widget -->
+    <div class="chat-widget">
+        <div class="chat-header">
+            <div class="chat-title">
+                <i class="fas fa-robot"></i>
+                <span>Ask Me Anything</span>
+            </div>
+            <button class="chat-toggle">
+                <i class="fas fa-chevron-down"></i>
+            </button>
+        </div>
+        <div class="chat-messages">
+            <div class="message bot">
+                <div class="message-content">
+                    Hi there! I'm here to answer questions about Hemant's experience and skills. What would you like to know?
+                </div>
+            </div>
+        </div>
+        <div class="chat-input-container">
+            <input type="text" class="chat-input" placeholder="Type your message...">
+            <button class="send-button">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <script src="https://kit.fontawesome.com/your-code.js" crossorigin="anonymous"></script>
+    <!-- Set API configuration before loading scripts -->
+    <script>
+        // Override API configuration for production
+        // This will be replaced during deployment
+        window.API_OVERRIDES = {
+            // Example: Uncomment and update for production
+            // BASE_URL: 'https://your-api-url.herokuapp.com'
+        };
+    </script>
+    <script src="js/config.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>
