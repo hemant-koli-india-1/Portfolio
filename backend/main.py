@@ -57,7 +57,8 @@ app = FastAPI(
 )
 
 # Mount static files
-app.mount("/static", StaticFiles(directory="../static", html=True), name="static")
+static_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'static')
+app.mount("/static", StaticFiles(directory=static_dir, html=True), name="static")
 
 # Get CORS origins from environment
 cors_origins = os.getenv("CORS_ORIGINS", "*")
@@ -161,7 +162,7 @@ def generate_response(user_message: str) -> str:
 # API Endpoints
 @app.get("/")
 async def root():
-    return FileResponse("../static/index.html")
+    return FileResponse(os.path.join(static_dir, "index.html"))
 
 @app.get("/api/health")
 async def health():
