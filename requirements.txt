@@ -9,8 +9,8 @@ gunicorn>=20.1.0,<21.0.0
 
 # Langchain stack
 langchain==0.1.16
+langchain-core>=0.1.52,<0.2.0
 langchain-groq==0.2.3
 langsmith==0.1.147
-langchain-core==0.1.42
 langchain-community==0.0.38
 langchain-text-splitters==0.0.2
