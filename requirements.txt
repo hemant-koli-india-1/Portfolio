@@ -7,13 +7,11 @@ httpx>=0.19.0,<0.20.0
 python-socketio>=5.0.0,<6.0.0
 gunicorn>=20.1.0,<21.0.0
 
-# Langchain + Groq compatible combo
 langchain==0.1.16
 langchain-core==0.1.42
 langchain-text-splitters==0.0.2
 langsmith==0.1.147
 langchain-community==0.0.38
-langchain-groq==0.2.3  # Compatible with the above versions
+langchain-groq==0.2.3
 
-# Optional: force numpy to avoid long build time
-numpy==1.26.2 --only-binary=:all:
+numpy>=1.26,<3.0  # <-- use this line
