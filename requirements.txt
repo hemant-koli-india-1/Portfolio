@@ -1,16 +1,16 @@
-fastapi==0.95.2          # Compatible with pydantic >=1.10,<2.0
+fastapi==0.95.2
 uvicorn==0.22.0
 python-multipart==0.0.5
 python-dotenv==1.0.1
-pydantic==1.10.13        # Avoid Pydantic 2.x because FastAPI 0.68.2 doesn't support it
+pydantic==1.10.13
 httpx==0.25.0
 python-socketio==5.9.0
 gunicorn==20.1.0
 
-# LangChain + Groq stack (working together)
 langchain==0.2.10
-langchain-core==0.3.50
 langchain-community==0.0.38
-langchain-groq==0.2.3
 langchain-text-splitters==0.2.0
 langsmith==0.1.80
+
+# Use langchain-groq version compatible with langchain-core<0.3.0
+langchain-groq==0.2.0
