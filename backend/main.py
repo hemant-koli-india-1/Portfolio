@@ -57,15 +57,18 @@ app = FastAPI(
 )
 
 # Mount static files
-static_dir = os.path.join(os.path.dirname(__file__), '../static')
+static_dir = os.path.join(os.path.dirname(__file__), '..', 'static')
 
 # Ensure static directory exists and is readable
 if not os.path.exists(static_dir):
     logger.error(f"Static directory does not exist: {static_dir}")
     raise RuntimeError(f"Static directory not found: {static_dir}")
 
-# Serve static files
+# Serve static files from the static directory
 app.mount("/static", StaticFiles(directory=static_dir), name="static")
+
+# Also serve files from subdirectories of static
+app.mount("/static/js", StaticFiles(directory=os.path.join(static_dir, 'js')), name="static_js")
 
 # Serve index.html at root
 @app.get("/")
