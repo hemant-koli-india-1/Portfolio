@@ -58,15 +58,24 @@ app = FastAPI(
 
 # Mount static files
 static_dir = os.path.join(os.path.dirname(__file__), '../static')
-app.mount("/static", StaticFiles(directory=static_dir, html=True), name="static")
 
-# Ensure static directory exists
+# Ensure static directory exists and is readable
 if not os.path.exists(static_dir):
-    os.makedirs(static_dir, exist_ok=True)
-    logger.warning(f"Static directory created: {static_dir}")
+    logger.error(f"Static directory does not exist: {static_dir}")
+    raise RuntimeError(f"Static directory not found: {static_dir}")
 
-# Add index.html as fallback
-app.mount("/", StaticFiles(directory=static_dir, html=True), name="index")
+# Serve static files
+app.mount("/static", StaticFiles(directory=static_dir), name="static")
+
+# Serve index.html at root
+@app.get("/")
+async def root():
+    return FileResponse(os.path.join(static_dir, "index.html"))
+
+# Serve favicon
+@app.get("/favicon.ico")
+async def favicon():
+    return FileResponse(os.path.join(static_dir, "favicon.ico"))
 
 # Get CORS origins from environment
 cors_origins = os.getenv("CORS_ORIGINS", "*")
