@@ -15,7 +15,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Import the Chain class
-from chains import Chain
+from backend.chains import Chain
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
